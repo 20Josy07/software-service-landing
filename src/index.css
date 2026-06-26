@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply text-slate-100 antialiased;
+    background-color: #06080f;
+    background-image:
+      radial-gradient(ellipse 90% 60% at 50% -30%, rgba(6, 182, 212, 0.18), transparent),
+      radial-gradient(ellipse 50% 40% at 100% 10%, rgba(0, 255, 170, 0.1), transparent),
+      radial-gradient(ellipse 40% 30% at 0% 80%, rgba(34, 211, 238, 0.07), transparent);
+  }
+
+  ::selection {
+    @apply bg-electric-400/40 text-white;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-void-900/80 border border-electric-500/15 backdrop-blur-sm;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(34, 211, 238, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 211, 238, 0.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .nav-link {
+    @apply relative px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-300;
+    @apply text-slate-400 hover:text-electric-300;
+  }
+
+  .nav-link-active {
+    @apply text-electric-300 bg-electric-500/15 shadow-[inset_0_0_12px_rgba(34,211,238,0.12)];
+  }
+
+  .nav-link-active::after {
+    content: '';
+    @apply absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyber-400;
+    box-shadow: 0 0 8px rgba(0, 255, 170, 0.8);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(135deg, #22d3ee 0%, #00ffaa 50%, #4ade80 100%);
+  }
+
+  .text-gradient-warm {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
+  }
+
+  .bg-gradient-brand {
+    background-image: linear-gradient(135deg, #06b6d4 0%, #00ffaa 100%);
+  }
+
+  .border-gradient {
+    border-image: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.6), rgba(0, 255, 170, 0.6), transparent) 1;
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 40px rgba(34, 211, 238, 0.25), 0 0 80px rgba(34, 211, 238, 0.08);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 30px rgba(0, 255, 170, 0.3);
+  }
+
+  @keyframes modal-backdrop-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes modal-panel-in {
+    from {
+      opacity: 0;
+      transform: translateY(2rem) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @media (min-width: 640px) {
+    @keyframes modal-panel-in {
+      from {
+        opacity: 0;
+        transform: scale(0.94) translateY(0.5rem);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+  }
+
+  @keyframes quote-step-in {
+    from {
+      opacity: 0;
+      transform: translateX(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .modal-backdrop {
+    animation: modal-backdrop-in 0.3s ease-out;
+  }
+
+  .modal-panel {
+    animation: modal-panel-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .modal-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(34, 211, 238, 0.3) transparent;
+  }
+
+  .modal-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .modal-scroll::-webkit-scrollbar-thumb {
+    background: rgba(34, 211, 238, 0.25);
+    border-radius: 999px;
+  }
+
+  .quote-step-content {
+    animation: quote-step-in 0.28s ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
